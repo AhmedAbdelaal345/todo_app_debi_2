@@ -9,7 +9,11 @@ class LoadedState extends TodoState {
   LoadedState({required this.todos});
 }
 
+class ErrorState extends TodoState {
+  String message;
+  ErrorState({required this.message});
+}
+
 class TodoDeletedSuccessfully extends TodoState {}
 
 class LoadingTodos extends TodoState {}
-

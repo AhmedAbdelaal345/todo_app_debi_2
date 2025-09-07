@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app_debi/cubit/todo_cubit.dart';
+import 'package:todo_app_debi/pages/details_page.dart';
 import 'package:todo_app_debi/pages/login_page.dart';
 import 'package:todo_app_debi/pages/todo_page.dart';
 import 'package:todo_app_debi/pages/wrapper_page.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         routes: {
           TodoPage.id: (context) => const TodoPage(),
           WrapperPage.id: (context) => const WrapperPage(),
+          DetailsPage.id: (context) => const DetailsPage(),
         },
       ),
     );
