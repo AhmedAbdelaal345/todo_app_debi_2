@@ -294,23 +294,14 @@ class ProfilePage extends StatelessWidget {
                           style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            const Text(
-                              "All Right Reserved By ENG.Ahmed Abdelaal",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const Text(
-                              'Manage your daily tasks efficiently ',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
+                        const Text(
+                          'Manage your daily tasks efficiently ',
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          "All Right Reserved By ENG.Ahmed Abdelaal",
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                       ],
                     ),
