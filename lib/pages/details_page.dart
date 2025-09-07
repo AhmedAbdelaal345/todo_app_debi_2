@@ -42,25 +42,50 @@ class _DetailsPageState extends State<DetailsPage> {
     }
   }
 
-  void _saveTodo() {
+  Future<void> _saveTodo() async {
     if (_formKey.currentState!.validate()) {
-      print("DEBUG: Save button pressed with title: ${title.text.trim()}"); // Debug print
+      final titleText = title.text.trim();
+      final descText = desc.text.trim();
+      final deadlineText = deadLine.text.trim();
       
-      // Create a todo with title only for now
-      context.read<TodoCubit>().addTodo(title.text.trim());
+      print("DEBUG: Save button pressed");
+      print("DEBUG: Title: '$titleText'");
+      print("DEBUG: Description: '$descText'");
+      print("DEBUG: Deadline: '$deadlineText'");
+      
+      try {
+        // ✅ FIXED: Now passing description and deadline properly
+        await context.read<TodoCubit>().addTodo(
+          titleText,
+          description: descText.isNotEmpty ? descText : null,
+          deadline: deadlineText.isNotEmpty ? deadlineText : null,
+        );
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Todo saved successfully!'),
-          backgroundColor: Colors.green,
-        ),
-      );
+        if (mounted) {
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Todo saved successfully!'),
+              backgroundColor: Colors.green,
+            ),
+          );
 
-      // Navigate back
-      Navigator.pop(context);
+          // Navigate back with success result
+          Navigator.pop(context, true);
+        }
+      } catch (e) {
+        print("DEBUG: Error saving todo: $e");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Error saving todo: $e'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
     } else {
-      print("DEBUG: Form validation failed"); // Debug print
+      print("DEBUG: Form validation failed");
     }
   }
 
@@ -102,9 +127,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 contentPadding: const EdgeInsets.all(15),
                 maxLines: 3,
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter a description';
-                  }
+                  // ✅ FIXED: Made description optional - remove validation
+                  // Description is now optional, so no validation needed
                   return null;
                 },
               ),
@@ -116,9 +140,8 @@ class _DetailsPageState extends State<DetailsPage> {
                 onTap: _selectDate,
                 suffixIcon: const Icon(Icons.calendar_today),
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please select a deadline';
-                  }
+                  // ✅ FIXED: Made deadline optional - remove validation
+                  // Deadline is now optional, so no validation needed
                   return null;
                 },
               ),

@@ -6,7 +6,7 @@ import 'package:todo_app_debi/pages/wrapper_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
+  static String id = "LoginPage";
   static const emailvaild = r"^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$";
 
   @override

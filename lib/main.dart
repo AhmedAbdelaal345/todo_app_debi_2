@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: LoginPage(),
         routes: {
+          LoginPage.id: (context) => const LoginPage(),
           TodoPage.id: (context) => const TodoPage(),
           WrapperPage.id: (context) => const WrapperPage(),
           DetailsPage.id: (context) => const DetailsPage(),
