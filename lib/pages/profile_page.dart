@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo_app_debi/cubit/todo_cubit.dart';
 import 'package:todo_app_debi/cubit/todo_state.dart';
+import 'package:todo_app_debi/pages/login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -17,7 +18,7 @@ class ProfilePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancel'),
+            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
           ),
           ElevatedButton(
             onPressed: () async {
@@ -26,7 +27,7 @@ class ProfilePage extends StatelessWidget {
               if (context.mounted) {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  '/login',
+                  LoginPage.id,
                   (route) => false,
                 );
               }
@@ -87,7 +88,8 @@ class ProfilePage extends StatelessWidget {
             .where(
               (todo) =>
                   // You might want to add a completed field to your TodoModel
-                  false, // For now, assuming no completed todos tracking
+                  todoCubit
+                      .isClosed, // For now, assuming no completed todos tracking
             )
             .length;
 
@@ -292,9 +294,23 @@ class ProfilePage extends StatelessWidget {
                           style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Manage your daily tasks efficiently',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        Row(
+                          children: [
+                            const Text(
+                              "All Right Reserved By ENG.Ahmed Abdelaal",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            const Text(
+                              'Manage your daily tasks efficiently ',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
