@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app_debi/cubit/todo_cubit.dart';
 import 'package:todo_app_debi/pages/details_page.dart';
 import 'package:todo_app_debi/pages/login_page.dart';
+import 'package:todo_app_debi/pages/splach_page.dart';
 import 'package:todo_app_debi/pages/todo_page.dart';
 import 'package:todo_app_debi/pages/wrapper_page.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => TodoCubit(),
       child: MaterialApp(
-        home: LoginPage(),
+        home: SplashPage(),
         routes: {
           LoginPage.id: (context) => const LoginPage(),
           TodoPage.id: (context) => const TodoPage(),

@@ -33,11 +33,27 @@ class _DetailsPageState extends State<DetailsPage> {
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
+      builder: (context, child) => Theme(
+        data: Theme.of(context).copyWith(
+          colorScheme: ColorScheme.light(
+            primary: Colors.blue, // Header background color
+            onPrimary: Colors.white, // Header text color
+            onSurface: Colors.black, // Body text color
+          ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.blue, // Button text color
+            ),
+          ),
+        ),
+        child: child!,
+      ),
     );
 
     if (pickedDate != null) {
       setState(() {
-        deadLine.text = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+        deadLine.text =
+            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
       });
     }
   }
@@ -47,14 +63,13 @@ class _DetailsPageState extends State<DetailsPage> {
       final titleText = title.text.trim();
       final descText = desc.text.trim();
       final deadlineText = deadLine.text.trim();
-      
+
       print("DEBUG: Save button pressed");
       print("DEBUG: Title: '$titleText'");
       print("DEBUG: Description: '$descText'");
       print("DEBUG: Deadline: '$deadlineText'");
-      
+
       try {
-        // ✅ FIXED: Now passing description and deadline properly
         await context.read<TodoCubit>().addTodo(
           titleText,
           description: descText.isNotEmpty ? descText : null,
@@ -160,10 +175,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   onPressed: _saveTodo,
                   child: const Text(
                     "Save",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                    ),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
